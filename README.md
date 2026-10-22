@@ -28,26 +28,26 @@ It allows authorized analysts to submit reports, assign risk levels, and update 
 
 - Retrieve report details using a report ID.
 
-Technologies
+**Technologies**
 
-Solidity ^0.8.20
+- Solidity ^0.8.20
 
-Ethereum smart contracts
+- Ethereum smart contracts
 
-Remix IDE
+- Remix IDE
 
-Remix VM for simulated testing
+- Remix VM for simulated testing
 
-GitHub for source code and documentation
+- GitHub for source code and documentation
 
-Project Structure
+**Project Structure**
 
-Blockchain-Incident-Registry/
-├── IncidentRegistry.sol
-├── README.md
-├── TESTING.md
-├── LEARNINGS.md
-└── screenshots/
+Blockchain-Incident-Registry/  
+├── IncidentRegistry.sol  
+├── README.md  
+├── TESTING.md  
+├── LEARNINGS.md  
+└── screenshots/  
 
 How It Works
 
