@@ -49,58 +49,58 @@ Blockchain-Incident-Registry/
 ├── LEARNINGS.md  
 └── screenshots/  
 
-How It Works
+**How It Works**
 
-The contract deployer becomes the owner and an authorized analyst.
+1. The contract deployer becomes the owner and an authorized analyst.
+   
+2. The owner can authorize or revoke analysts.
 
-The owner can authorize or revoke analysts.
+3. An authorized analyst can create a report containing a subject address, transaction hash, evidence hash, and risk level.
 
-An authorized analyst can create a report containing a subject address, transaction hash, evidence hash, and risk level.
+4. The contract assigns a unique report ID and initializes its status as Open.
 
-The contract assigns a unique report ID and initializes its status as Open.
+5. Authorized analysts can update the report status.
 
-Authorized analysts can update the report status.
+6. Anyone can call the read-only getReport function to retrieve report details.
 
-Anyone can call the read-only getReport function to retrieve report details.
-
-Testing
+**Testing**
 
 The contract was compiled and deployed using Remix IDE's simulated Remix VM environment.
 
 The following scenarios were tested:
 
-Successful contract deployment.
+- Successful contract deployment.
 
-Verification of the owner and analyst permissions.
+- Verification of the owner and analyst permissions.
 
-Successful creation and retrieval of a report.
+- Successful creation and retrieval of a report.
 
-Successful status update from Open to UnderReview.
+- Successful status update from Open to UnderReview.
 
-Rejection of report creation by an unauthorized account.
+- Rejection of report creation by an unauthorized account.
 
-Rejection of a duplicate transaction hash.
+- Rejection of a duplicate transaction hash.
 
 See TESTING.md for more details.
 
-Security and Limitations
+**Security and Limitations**
 
-The project uses synthetic test data.
+- The project uses synthetic test data.
 
-Data stored on a public blockchain may be visible to others.
+- Data stored on a public blockchain may be visible to others.
 
-Hashes do not automatically guarantee confidentiality or prove that evidence is authentic.
+- Hashes do not automatically guarantee confidentiality or prove that evidence is authentic.
 
-Risk levels are supplied by the analyst; they are not calculated automatically.
+- Risk levels are supplied by the analyst; they are not calculated automatically.
 
-The prototype has not been audited and is not intended for production use.
+- The prototype has not been audited and is not intended for production use.
 
-Testing was performed in Remix VM; the contract has not been deployed to a public blockchain.
+- Testing was performed in Remix VM; the contract has not been deployed to a public blockchain.
 
-Learning Objectives
+**Learning Objectives**
 
 This project explores Solidity fundamentals, smart contract deployment, role-based access control, mappings, structs, enums, events, transaction validation, and basic security testing.
 
-License
+**License**
 
 This project is shared for educational purposes.
