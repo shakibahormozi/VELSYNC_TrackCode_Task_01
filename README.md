@@ -1,4 +1,4 @@
-## Blockchain Incident Registry
+ ## Blockchain Incident Registry
 
 A beginner-friendly smart contract project built with Solidity and tested using the Remix IDE.
 
@@ -12,9 +12,9 @@ It allows authorized analysts to submit reports, assign risk levels, and update 
 
 **Features**  
 
-Register reports associated with blockchain transactions.
+-Register reports associated with blockchain transactions.
 
-Assign a risk level from 1 to 5.
+-Assign a risk level from 1 to 5.
 
 Track report statuses: Open, UnderReview, Resolved, and FalsePositive.
 
