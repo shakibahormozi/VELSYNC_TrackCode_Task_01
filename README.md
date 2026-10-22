@@ -14,19 +14,19 @@ It allows authorized analysts to submit reports, assign risk levels, and update 
 
 - Register reports associated with blockchain transactions.
 
--Assign a risk level from 1 to 5.
+- Assign a risk level from 1 to 5.
 
-Track report statuses: Open, UnderReview, Resolved, and FalsePositive.
+- Track report statuses: Open, UnderReview, Resolved, and FalsePositive.
 
-Restrict report creation and status updates to authorized analysts.
+- Restrict report creation and status updates to authorized analysts.
 
-Allow the contract owner to manage analyst permissions.
+- Allow the contract owner to manage analyst permissions.
 
-Prevent duplicate reports using the same transaction hash.
+- Prevent duplicate reports using the same transaction hash.
 
-Emit events when analyst permissions or report statuses change.
+- Emit events when analyst permissions or report statuses change.
 
-Retrieve report details using a report ID.
+- Retrieve report details using a report ID.
 
 Technologies
 
