@@ -12,7 +12,7 @@ It allows authorized analysts to submit reports, assign risk levels, and update 
 
 **Features**  
 
--Register reports associated with blockchain transactions.
+- Register reports associated with blockchain transactions.
 
 -Assign a risk level from 1 to 5.
 
