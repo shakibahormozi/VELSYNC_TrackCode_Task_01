@@ -1,106 +1,134 @@
- ## Blockchain Incident Registry
+## TimeLock Smart Contract
 
-A beginner-friendly smart contract project built with Solidity and tested using the Remix IDE.
+**Overview**
 
-**Overview**  
+TimeLock is a simple Ethereum smart contract written in Solidity that allows funds to be locked until a specified amount of time has passed. Only the account that deploys the contract can withdraw the funds, and withdrawals are permitted only after the unlock time has been reached.
 
-The Blockchain Incident Registry is an educational smart contract prototype designed to register and track reports associated with blockchain transactions.  
+This project demonstrates the use of time-based conditions, access control, and Ether transfers in Solidity.
 
-It allows authorized analysts to submit reports, assign risk levels, and update investigation statuses. Each report receives a unique ID and includes a transaction hash and an evidence hash for reference.  
+**Features**
 
-**Important:** This project does not automatically scan blockchain transactions, detect illicit activity, or verify whether a report is accurate. It is an educational prototype, not a production investigation or risk-detection system.  
+- Time-Based Lock: Funds remain locked until the specified unlock time.
 
-**Features**  
+- Owner Access Control: Only the contract owner can withdraw funds.
 
-- Register reports associated with blockchain transactions.
+- Remaining Time Calculation: Displays the remaining lock period in days, hours, minutes, and seconds.
 
-- Assign a risk level from 1 to 5.
+- Ether Transfers: Uses Solidity's low-level call method to transfer the contract's balance to the owner.
 
-- Track report statuses: Open, UnderReview, Resolved, and FalsePositive.
-
-- Restrict report creation and status updates to authorized analysts.
-
-- Allow the contract owner to manage analyst permissions.
-
-- Prevent duplicate reports using the same transaction hash.
-
-- Emit events when analyst permissions or report statuses change.
-
-- Retrieve report details using a report ID.
+- Input Flexibility: The lock duration is provided during contract deployment.
 
 **Technologies**
 
-- Solidity ^0.8.20
-
-- Ethereum smart contracts
+- Solidity 0.8.34
 
 - Remix IDE
 
-- Remix VM for simulated testing
-
-- GitHub for source code and documentation
-
-**Project Structure**
-
-Blockchain-Incident-Registry/  
-├── IncidentRegistry.sol  
-├── README.md  
-├── TESTING.md  
-├── LEARNINGS.md  
-└── screenshots/  
+- Ethereum Virtual Machine (EVM)
 
 **How It Works**
 
-1. The contract deployer becomes the owner and an authorized analyst.
-   
-2. The owner can authorize or revoke analysts.
+1. Contract Deployment
 
-3. An authorized analyst can create a report containing a subject address, transaction hash, evidence hash, and risk level.
+The constructor accepts a parameter called _unlockOffset, which represents the lock duration in seconds.
 
-4. The contract assigns a unique report ID and initializes its status as Open.
+When the contract is deployed, it calculates the unlock timestamp by adding the specified duration to the current block timestamp.
 
-5. Authorized analysts can update the report status.
+For example, passing 120 as _unlockOffset sets the unlock time approximately two minutes after deployment.
 
-6. Anyone can call the read-only getReport function to retrieve report details.
+The account that deploys the contract is stored as the owner.
 
-**Testing**
+2. Checking the Remaining Time
 
-The contract was compiled and deployed using Remix IDE's simulated Remix VM environment.
+The getTimeRemaining() function calculates how much time remains before withdrawals are allowed.
 
-The following scenarios were tested:
+It returns four values:
 
-- Successful contract deployment.
+- daysRemaining
 
-- Verification of the owner and analyst permissions.
+- hoursRemaining
 
-- Successful creation and retrieval of a report.
+- minutesRemaining
 
-- Successful status update from Open to UnderReview.
+- secondsRemaining
 
-- Rejection of report creation by an unauthorized account.
+If the unlock time has already been reached, the function returns zero for all four values.
 
-- Rejection of a duplicate transaction hash.
+This function is read-only and does not modify the blockchain state.
 
-See TESTING.md for more details.
+3. Withdrawing Funds
 
-**Security and Limitations**
+The withdraw() function allows the owner to withdraw the contract's entire Ether balance once the lock period has expired.
 
-- The project uses synthetic test data.
+It checks that:
 
-- Data stored on a public blockchain may be visible to others.
+1. The current block timestamp is greater than or equal to the unlock timestamp.
 
-- Hashes do not automatically guarantee confidentiality or prove that evidence is authentic.
+2. The caller is the contract owner.
 
-- Risk levels are supplied by the analyst; they are not calculated automatically.
+3. The Ether transfer succeeds.
 
-- The prototype has not been audited and is not intended for production use.
+If any requirement fails, the transaction is reverted.
 
-- Testing was performed in Remix VM; the contract has not been deployed to a public blockchain.
 
-**Learning Objectives**
+## Main Functions
 
-This project explores Solidity fundamentals, smart contract deployment, role-based access control, mappings, structs, enums, events, transaction validation, and basic security testing.
+| Function | Description |
+|---|---|
+| `constructor(uint _unlockOffset)` | Sets the lock duration and records the owner. |
+| `getTimeRemaining()` | Returns the remaining lock time in days, hours, minutes, and seconds. |
+| `withdraw()` | Transfers the contract's Ether balance to the owner after unlocking. |
 
-**License**
+How to Test in Remix IDE
 
-This project is shared for educational purposes.
+Open Remix IDE.
+
+Create a file named TimeLock.sol and paste the contract code into it.
+
+Select Solidity compiler version 0.8.34 and compile the contract.
+
+Deploy the contract using Remix VM.
+
+Enter a lock duration, such as 120, for a two-minute lock.
+
+To fund the contract, enter an Ether amount in the VALUE field before deployment and select wei, gwei, or ether as appropriate.
+
+Call getTimeRemaining() to check the remaining time.
+
+Try calling withdraw() before the lock expires. The transaction should revert with You can't withdraw yet.
+
+After the lock expires, call withdraw() from the owner account.
+
+Verify that the contract balance has been transferred to the owner.
+
+Note: getTimeRemaining() does not update automatically every second. Call it again to retrieve the latest values. In Remix VM, block timestamps advance according to the test environment and mined transactions, so elapsed time may not behave exactly like a continuously running real-world clock.
+
+Security Considerations
+
+The contract restricts withdrawals to the owner.
+
+The unlock condition is enforced on-chain using block.timestamp.
+
+The transfer uses call, and its success status is checked.
+
+This is an educational project and has not been audited. A production-ready implementation should also consider reentrancy protection, withdrawal-state management, and additional security testing.
+
+Learning Outcomes
+
+Through this project, I practiced:
+
+Writing and compiling Solidity smart contracts.
+
+Working with constructors, state variables, and access control.
+
+Using block.timestamp for time-based conditions.
+
+Calculating time intervals using seconds.
+
+Receiving and transferring Ether.
+
+Testing smart contract behavior and handling reverted transactions in Remix IDE.
+
+Disclaimer
+
+This project is intended for educational purposes only. It has not been professionally audited and should not be used to secure real funds without further development and security review.
