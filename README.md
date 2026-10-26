@@ -79,56 +79,58 @@ If any requirement fails, the transaction is reverted.
 | `getTimeRemaining()` | Returns the remaining lock time in days, hours, minutes, and seconds. |
 | `withdraw()` | Transfers the contract's Ether balance to the owner after unlocking. |
 
-How to Test in Remix IDE
 
-Open Remix IDE.
 
-Create a file named TimeLock.sol and paste the contract code into it.
+**How to Test in Remix IDE**
 
-Select Solidity compiler version 0.8.34 and compile the contract.
+1. Open Remix IDE.
 
-Deploy the contract using Remix VM.
+2. Create a file named TimeLock.sol and paste the contract code into it.
 
-Enter a lock duration, such as 120, for a two-minute lock.
+3. Select Solidity compiler version 0.8.34 and compile the contract.
 
-To fund the contract, enter an Ether amount in the VALUE field before deployment and select wei, gwei, or ether as appropriate.
+4. Deploy the contract using Remix VM.
 
-Call getTimeRemaining() to check the remaining time.
+5. Enter a lock duration, such as 120, for a two-minute lock.
 
-Try calling withdraw() before the lock expires. The transaction should revert with You can't withdraw yet.
+6. To fund the contract, enter an Ether amount in the VALUE field before deployment and select wei, gwei, or ether as appropriate.
 
-After the lock expires, call withdraw() from the owner account.
+7. Call getTimeRemaining() to check the remaining time.
 
-Verify that the contract balance has been transferred to the owner.
+8. Try calling withdraw() before the lock expires. The transaction should revert with You can't withdraw yet.
 
-Note: getTimeRemaining() does not update automatically every second. Call it again to retrieve the latest values. In Remix VM, block timestamps advance according to the test environment and mined transactions, so elapsed time may not behave exactly like a continuously running real-world clock.
+9. After the lock expires, call withdraw() from the owner account.
 
-Security Considerations
+10. Verify that the contract balance has been transferred to the owner.
 
-The contract restricts withdrawals to the owner.
+**Note:** getTimeRemaining() does not update automatically every second. Call it again to retrieve the latest values. In Remix VM, block timestamps advance according to the test environment and mined transactions, so elapsed time may not behave exactly like a continuously running real-world clock.
 
-The unlock condition is enforced on-chain using block.timestamp.
+**Security Considerations**
 
-The transfer uses call, and its success status is checked.
+- The contract restricts withdrawals to the owner.
 
-This is an educational project and has not been audited. A production-ready implementation should also consider reentrancy protection, withdrawal-state management, and additional security testing.
+- The unlock condition is enforced on-chain using block.timestamp.
 
-Learning Outcomes
+- The transfer uses call, and its success status is checked.
+
+- This is an educational project and has not been audited. A production-ready implementation should also consider reentrancy protection, withdrawal-state management, and additional security testing.
+
+**Learning Outcomes**
 
 Through this project, I practiced:
 
-Writing and compiling Solidity smart contracts.
+- Writing and compiling Solidity smart contracts.
 
-Working with constructors, state variables, and access control.
+- Working with constructors, state variables, and access control.
 
-Using block.timestamp for time-based conditions.
+- Using block.timestamp for time-based conditions.
 
-Calculating time intervals using seconds.
+- Calculating time intervals using seconds.
 
-Receiving and transferring Ether.
+- Receiving and transferring Ether.
 
-Testing smart contract behavior and handling reverted transactions in Remix IDE.
+- Testing smart contract behavior and handling reverted transactions in Remix IDE.
 
-Disclaimer
+**Disclaimer**
 
 This project is intended for educational purposes only. It has not been professionally audited and should not be used to secure real funds without further development and security review.
